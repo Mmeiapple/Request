@@ -2,7 +2,6 @@ import requests
 from bs4 import BeautifulSoup
 import re
 
-
 class GetUrlTitle:
     def __init__(self,url):
         self.response=requests.get(url)

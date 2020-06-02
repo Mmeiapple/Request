@@ -1,5 +1,5 @@
 import requests
-import re
+import json
 
 
 class GetToken:
@@ -8,13 +8,22 @@ class GetToken:
         self.response = requests.get('https://api.weixin.qq.com/cgi-bin/token?', params=data)
         self.response.encoding='utf-8'
     def get_token(self):
-        content=str(self.response.text)
-        result=re.match('"access_token":"(.+)"',content)
-        return result.group(1)
+        content=self.response.json()
+        return content['access_token']
+
+
+class GetTag:
+    def __init__(self,token,url='https://api.weixin.qq.com/cgi-bin/tags/get?'):
+        self.url=url
+        self.token=token
+
+    def get_tag(self):
+        data = {'access_token':self.token}
+        response=requests.get(self.url,params=data)
+        response.encoding='utf-8'
+        return response.json()
 
 if __name__=="__main__":
-    a=GetToken('wx60536c088aee3040','f214d833f873d8cc1b38255eca0938d9')
-    print(a.get_token())
-# data={'grant_type':'client_credential','appid':'wx60536c088aee3040','secret':'f214d833f873d8cc1b38255eca0938d9'}
-# response=requests.get('https://api.weixin.qq.com/cgi-bin/token?',params=data)
-# print(response.content.decode('utf-8'))
+    token=GetToken('wx60536c088aee3040','f214d833f873d8cc1b38255eca0938d9').get_token()
+    content=GetTag(token).get_tag()
+    print(json.dumps(content,indent=1,ensure_ascii=False))
