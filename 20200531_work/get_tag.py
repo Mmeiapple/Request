@@ -27,3 +27,4 @@ if __name__=="__main__":
     token=GetToken('wx60536c088aee3040','f214d833f873d8cc1b38255eca0938d9').get_token()
     content=GetTag(token).get_tag()
     print(json.dumps(content,indent=1,ensure_ascii=False))
+    print(token)
