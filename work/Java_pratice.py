@@ -32,6 +32,5 @@ if __name__=="__main__":
     encode_string=test.encode(string)
     decode_string=test.decode(encode_string)
     print("加密字符串："+string)
-
     print("加密："+str(encode_string))
     print("解密："+str(decode_string))
