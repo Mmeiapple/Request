@@ -23,6 +23,11 @@ def IfMerge(merged,row_index,col_index,sheet):
     else:
         print("不属于合并单元格")
 
+
+
+def ReadRowValues(sheet,values):
+    return sheet.row_values(values)
+
 if __name__=="__main__":
     workbook=xlrd.open_workbook(data_path)
     sheet=workbook.sheet_by_index(0)
@@ -30,7 +35,8 @@ if __name__=="__main__":
 
     a=WhetherMergeCells(merged,3,0,sheet)
     print(a)
-
+    data1=ReadRowValues(sheet,1)
+    print(data1)
 # call1=sheet.cell_value(1,0)
 # print("01:",sheet.cell_value(1,0))
 # print("02:",sheet.cell_value(2,0))
